@@ -29,10 +29,6 @@ jobs:
           python -m venv venv
           source venv/bin/activate
       
-      # Copy requirements.txt to root if it's in backend folder
-      - name: Copy requirements to root
-        run: cp backend/requirements.txt ./requirements.txt
-      
       - name: Install dependencies
         run: pip install -r requirements.txt
         
@@ -81,5 +77,3 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: 'heart'
-          # Remove slot-name or set it to empty - deploy to main app
-          # slot-name: 'Production'
