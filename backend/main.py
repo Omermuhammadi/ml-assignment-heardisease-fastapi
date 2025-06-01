@@ -48,9 +48,6 @@ class HeartData(BaseModel):
     ca: float
     thal: float
 
-@app.get("/")
-def root():
-    return {"message": "Heart Disease Prediction API is running!"}
 
 @app.post("/predict")
 def predict(data: HeartData):
