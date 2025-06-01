@@ -6,15 +6,23 @@ from pydantic import BaseModel
 import joblib
 import numpy as np
 import uvicorn
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000)
 
-# Load the saved model
-model = joblib.load(r"C:\Users\Lenovo\Downloads\model.pkl")  # adjust path if needed
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 # Define the FastAPI app
 app = FastAPI(title="Heart Disease Prediction API")
+
+# Mount static files (frontend)
+app.mount("/static", StaticFiles(directory="frontend"), name="static")
+
+@app.get("/")
+def read_root():
+    return FileResponse("frontend/index.html")
+
+# Load the saved model (use relative path for Docker compatibility)
+model = joblib.load("ml/model.pkl")
+
 
 app.add_middleware(
     CORSMiddleware,

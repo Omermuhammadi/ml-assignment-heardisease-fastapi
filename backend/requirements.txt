@@ -3,5 +3,7 @@ uvicorn
 scikit-learn
 joblib
 pydantic
+python-multipart
+aiofiles
 numpy
 pandas
